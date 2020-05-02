@@ -25,4 +25,7 @@ public interface WalletUserDao extends JpaRepository<WalletUser, Integer>{
 	@Query( value = "select user_id from wallet_user where login_name= :login_name and user_password= :password ", nativeQuery=true)
 	Optional<Integer> validLogin(@Param("login_name") String login_name, @Param("password") String password);
 	
+	@Query("SELECT w FROM WalletUser w WHERE LOWER(w.UserName) LIKE %?1%")
+	  public List<WalletUser> findByName(String name);
+	
 }
